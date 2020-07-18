@@ -4,7 +4,7 @@
     <h2>Essential Links</h2>
     <ul>
       <li>
-          <el-button @click="goHome">进入主页</el-button>
+          <el-button @click="goHome">进入主页2222</el-button>
         <a
           href="https://vuejs.org"
           target="_blank"

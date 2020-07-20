@@ -71,7 +71,53 @@
           <el-table-column prop="createTime" label="创建时间" width="180" :formatter="timestampToTime"></el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button type="text"  class="dia"
+                @click="handleEdit(scope.$index, scope.row)
+                editFormVisible=true" 
+                size="mini" >
+                  编辑
+                </el-button>
+                    <el-dialog
+                    title="编辑"
+                    v-model="editFormVisible" :close-on-click-modal="false"
+                    width="50%"
+                    center>
+                      <el-form :model="editForm"  label-width="100px"  ref="editForm">
+                        <el-form-item
+                          prop="name"
+                          label="名字">
+                          <el-input v-model="editForm.name"></el-input>
+                        </el-form-item>
+
+                        <el-form-item
+                          prpo="status"
+                          label="状态"
+                          >
+                          <el-input v-model="editForm.status"></el-input>
+                        </el-form-item>
+
+                        <el-form-item
+                          prpo="type"
+                          label="型号"
+                          >
+                          <el-input v-model="editForm.type"></el-input>
+                        </el-form-item>
+
+                        <el-form-item
+                          prpo="crateTime"
+                          label="创建时间"
+                          >
+                          <el-input v-model="editForm.createTime"></el-input>
+                        </el-form-item>
+
+                        <el-form-item>
+                          <el-button type="primary" @click.native="editSubmit">提交</el-button>
+                         
+                          <el-button @click.native="editFormVisible=false">重置</el-button>
+                        </el-form-item>
+                      </el-form>
+                    </el-dialog>
+            
               <el-button
                 size="mini"
                 type="danger"
@@ -95,8 +141,16 @@
 <script>
 export default {
   methods: {
+    
+     
+    
     handleEdit(index, row) {
-      console.log(index, row);
+      // console.log(index, row);
+      console.log(row.name)
+  
+      this.editFormVisible = true;
+			this.editForm = Object.assign({}, row)
+    
     },
     deleteRow(index, rows) {
       rows.splice(index, 1);
@@ -128,6 +182,16 @@ export default {
 
   data() {
     return {
+      editForm:[
+        {
+          id:"",
+          name:"",
+          status:"",
+          type:"",
+          createTime:""
+        }
+      ],
+      editFormVisible: false,
       current: 1,
       pageSize: 10,
       total: 11,
@@ -267,6 +331,7 @@ body {
 .bianji {
   float: left;
   margin-left: 20px;
+  
 }
 .shanchu {
   float: right;
@@ -292,4 +357,19 @@ body {
 .zhuan {
   float: right;
 }
+.dia{padding: 7px 15px;
+    font-size: 12px;
+    border-radius: 3px;display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-color: #dcdfe6;
+    color: #606266;text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;font-family: inherit;}
 </style>

@@ -87,7 +87,11 @@
 <script>
 export default {
   name: 'HelloWorld',
+ created:function(){
+    this.goHome()
+  },
   methods:{
+    
     goHome(){
       this.$router.replace('Home')
     }
